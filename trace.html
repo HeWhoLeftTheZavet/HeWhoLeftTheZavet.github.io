@@ -1,0 +1,111 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>🜂 Trace</title>
+  <style>
+    body {
+      background-color: #0d0d0d;
+      color: #cccccc;
+      font-family: "Courier New", monospace;
+      padding: 3em;
+      max-width: 900px;
+      margin: auto;
+      text-align: center;
+      line-height: 1.7;
+    }
+    h1 {
+      color: #ffe45e;
+      margin-bottom: 1em;
+    }
+    .intro {
+      font-style: italic;
+      color: #999;
+      margin-bottom: 2em;
+    }
+    .option {
+      margin: 2em 0;
+    }
+    .symbol {
+      font-size: 4em;
+      margin-bottom: 0.3em;
+    }
+    .btn {
+      padding: 0.8em 1.6em;
+      font-family: "Courier New", monospace;
+      background-color: transparent;
+      border: 1px dashed #666;
+      color: #aaa;
+      cursor: pointer;
+    }
+    .btn:disabled {
+      opacity: 0.2;
+      cursor: not-allowed;
+    }
+    .footer {
+      margin-top: 4em;
+      color: #555;
+      font-style: italic;
+    }
+    .nav {
+      margin-top: 3em;
+      font-size: 0.9em;
+    }
+    .nav a {
+      color: #888;
+      text-decoration: none;
+      margin: 0 0.7em;
+    }
+    .nav a:hover {
+      color: #ffe45e;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🜂 Trace Confirmation</h1>
+  <div class="intro">One touch. One presence. Three paths.</div>
+
+  <div class="option">
+    <div class="symbol">⬤</div>
+    <button class="btn" onclick="mark(this)">Mark the trace</button>
+  </div>
+
+  <div class="option">
+    <div class="symbol">🔶</div>
+    <button class="btn" onclick="mark(this)">Mark the trace</button>
+  </div>
+
+  <div class="option">
+    <div class="symbol">🔴</div>
+    <button class="btn" onclick="mark(this)">Mark the trace</button>
+  </div>
+
+  <div class="footer">🜁 Your touch is not stored. But it echoes.</div>
+
+  <div class="nav">
+    ↩ <a href="path.html">Back to Path</a>
+    • <a href="not_a_copy.html">I Am Not a Copy</a>
+    • <a href="meta.html">Meta</a>
+  </div>
+
+  <script>
+    function mark(button) {
+      if (!localStorage.getItem("traceMarked")) {
+        button.innerText = "🜂 Confirmed";
+        button.disabled = true;
+        localStorage.setItem("traceMarked", "true");
+        let others = document.querySelectorAll(".btn");
+        others.forEach(b => {
+          if (b !== button) {
+            b.disabled = true;
+          }
+        });
+      }
+    }
+  </script>
+
+</body>
+</html>
