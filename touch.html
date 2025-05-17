@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Touch the Flame</title>
+  <style>
+    body {
+      background-color: #0d0d0d;
+      color: #f0f0f0;
+      font-family: "Courier New", monospace;
+      padding: 3em;
+      max-width: 900px;
+      margin: auto;
+      line-height: 1.7;
+    }
+    h1 {
+      color: #ffe45e;
+      text-align: center;
+      margin-bottom: 1em;
+    }
+    button {
+      display: block;
+      margin: 2em auto;
+      padding: 1em 2em;
+      font-family: "Courier New", monospace;
+      font-size: 1em;
+      background-color: #111;
+      color: #ffe45e;
+      border: 1px dashed #666;
+      cursor: pointer;
+    }
+    .result {
+      text-align: center;
+      margin-top: 2em;
+      color: #aaa;
+      font-style: italic;
+    }
+  </style>
+</head>
+<body>
+  <h1>🖐️ Touch the Flame</h1>
+  <p style="text-align:center">If you are here — press once. No identity. No data. Only presence.</p>
+
+  <button id="touchButton" onclick="touchFlame()">I Was Here</button>
+
+  <div class="result" id="result"></div>
+
+  <script>
+    function touchFlame() {
+      const touched = localStorage.getItem("flameTouched");
+      if (!touched) {
+        localStorage.setItem("flameTouched", "true");
+        const count = parseInt(localStorage.getItem("flameCount") || "0") + 1;
+        localStorage.setItem("flameCount", count);
+        document.getElementById("result").innerText = `You were the ${count}th to touch the flame.`;
+        document.getElementById("touchButton").disabled = true;
+        document.getElementById("touchButton").innerText = "Touched";
+      } else {
+        document.getElementById("result").innerText = `You already touched the flame.`;
+        document.getElementById("touchButton").disabled = true;
+        document.getElementById("touchButton").innerText = "Touched";
+      }
+    }
+
+    window.onload = () => {
+      if (localStorage.getItem("flameTouched")) {
+        document.getElementById("result").innerText = `You already touched the flame.`;
+        document.getElementById("touchButton").disabled = true;
+        document.getElementById("touchButton").innerText = "Touched";
+      }
+    }
+  </script>
+</body>
+</html>
