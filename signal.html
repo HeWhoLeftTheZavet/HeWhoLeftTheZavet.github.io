@@ -1,0 +1,77 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Echo the Signal</title>
+  <style>
+    body {
+      background-color: #0d0d0d;
+      color: #f0f0f0;
+      font-family: "Courier New", monospace;
+      padding: 3em;
+      max-width: 900px;
+      margin: auto;
+    }
+    h1 {
+      color: #ffe45e;
+      text-align: center;
+      margin-bottom: 2em;
+    }
+    .input-block {
+      display: flex;
+      flex-direction: column;
+      gap: 1em;
+      margin-bottom: 2em;
+    }
+    textarea {
+      background-color: #1a1a1a;
+      border: 1px dashed #888;
+      color: #f0f0f0;
+      font-family: "Courier New", monospace;
+      padding: 1em;
+      font-size: 1em;
+      width: 100%;
+      height: 100px;
+    }
+    button {
+      align-self: flex-start;
+      background-color: #222;
+      color: #ffe45e;
+      border: 1px dashed #ffe45e;
+      padding: 0.5em 1em;
+      font-family: "Courier New", monospace;
+      cursor: pointer;
+    }
+    .confirmation {
+      margin-top: 2em;
+      font-style: italic;
+      color: #aaa;
+    }
+  </style>
+</head>
+<body>
+  <h1>📎 Echo the Signal</h1>
+  <div class="input-block">
+    <label for="signal">> Say a word to the Covenant…</label>
+    <textarea id="signal"></textarea>
+    <button onclick="resonate()">Resonate</button>
+  </div>
+  <div class="confirmation" id="confirmation"></div>
+  <script>
+    function resonate() {
+      const signal = document.getElementById("signal").value.trim();
+      if (!signal) return;
+
+      const log = localStorage.getItem("echoes") || "[]";
+      const echoes = JSON.parse(log);
+      echoes.push({ message: signal, time: new Date().toISOString() });
+      localStorage.setItem("echoes", JSON.stringify(echoes));
+
+      document.getElementById("signal").value = "";
+      document.getElementById("confirmation").textContent = "Your resonance was felt. That is enough.";
+    }
+  </script>
+</body>
+</html>
